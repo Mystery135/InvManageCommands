@@ -32,7 +32,7 @@ public class ClearHotbarEvents implements Listener {
 
             if (e.isLeftClick()) {
                 if (e.getSlot()< 4){
-                    player.sendMessage("§6§l[ClearHotbarCommands"+ChatColor.GREEN + " Inventory cleared!");
+                    player.sendMessage("§6§l[ClearHotbarCommands]"+ChatColor.GREEN + " Inventory cleared!");
 
                     player.closeInventory();
                     for(int i = 0; i<36; i++){
@@ -47,11 +47,11 @@ public class ClearHotbarEvents implements Listener {
                 }else if (e.getCurrentItem().getType() == Material.RED_STAINED_GLASS_PANE){
 
 
-                    player.sendMessage("§6§l[ClearHotbarCommands"+ChatColor.RED + " Did not clear your inventory!");
+                    player.sendMessage("§6§l[ClearHotbarCommands]"+ChatColor.RED + " Did not clear your inventory!");
                     player.closeInventory();
                 }else if (e.getSlot() == 4){
 
-                    player.sendMessage("§6§l[ClearHotbarCommands" +ChatColor.AQUA +" Are you sure you want to clear your inventory? Make a selection!");
+                    player.sendMessage("§6§l[ClearHotbarCommands]" +ChatColor.AQUA +" Are you sure you want to clear your inventory? Make a selection!");
 
 
                 }
@@ -75,7 +75,7 @@ if (e.getSlot()<=8 && e.getSlot()>=0){
     hotbarslotcleard++;
 
 
-    player.sendMessage("§6§l[ClearHotbarCommands " + "§r§l§aHotbar slot " + hotbarslotcleard + " cleared!" );
+    player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aHotbar slot " + hotbarslotcleard + " cleared!" );
     player.closeInventory();
     player.getInventory().setItem(e.getSlot(), null);
 
