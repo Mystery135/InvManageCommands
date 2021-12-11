@@ -2,7 +2,7 @@ name: ClearHotbarCommands
 version: 1.0
 author: Mxtery
 main: com.websiteofgames.clearhotbar.ClearHotbar
-api-version: 1.17
+api-version: 1.18
 commands:
   clearhotbar:
     description: Clears player's hotbar
