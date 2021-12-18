@@ -20,10 +20,11 @@ public class ClearHotbarCommands implements CommandExecutor {
         if (commandSender instanceof Player){
             Player player = (Player)commandSender;
             if (cmd.getName().equalsIgnoreCase("clearhotbar")){
+                player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aHotbar cleared!");
                 for(int i = 0; i<9; i++){
 
                     player.getInventory().setItem(i, null);
-                    player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aHotbar cleared!");
+
 
                 }
 
