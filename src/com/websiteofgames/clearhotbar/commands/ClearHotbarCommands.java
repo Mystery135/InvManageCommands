@@ -2,28 +2,83 @@ package com.websiteofgames.clearhotbar.commands;
 
 import com.websiteofgames.clearhotbar.inventories.ClearHotbarSlotScreen;
 import com.websiteofgames.clearhotbar.inventories.ClearInvScreen;
+import com.websiteofgames.clearhotbar.inventories.CopyInvScreen;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicIntegerArray;
+import java.util.HashMap;
+import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class ClearHotbarCommands implements CommandExecutor {
-
+public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command cmd, String s, String[] args) {
         if (commandSender instanceof Player){
             Player player = (Player)commandSender;
             if (cmd.getName().equalsIgnoreCase("clearhotbar")){
-                player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aHotbar cleared!");
-                for(int i = 0; i<9; i++){
+                if (args.length == 0){
 
-                    player.getInventory().setItem(i, null);
+                    player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aHotbar cleared!");
+                    for(int i = 0; i<9; i++){
+
+                        player.getInventory().setItem(i, null);
+
+
+                    }
+
+
+
+                }else if (args.length == 1){
+                    try{
+
+                        Player target = Bukkit.getPlayerExact(args[0]);
+
+                        if (player.getUniqueId().equals(target.getUniqueId())){
+
+                            player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aHotbar cleared!");
+                            for(int i = 0; i<9; i++){
+
+                                player.getInventory().setItem(i, null);
+
+
+                            }
+
+
+
+                        }else{
+                            for(int i = 0; i<9; i++){
+
+                                target.getInventory().setItem(i, null);
+
+
+                            }
+
+                            player.sendMessage("§6§l[ClearHotbarCommands] §aCleared §e" + target.getName() + "'s §r§ahotbar!");
+                            target.sendMessage("§6§l[ClearHotbarCommands] §e" + player.getName() + " §bhas cleared your hotbar!");
+
+                        }
+
+
+                    }catch (Exception e){
+
+
+                        player.sendMessage("§cThat player does not exist!");
+
+
+                    }
+
+
+                }else{
+
+                    player.sendMessage("§c/clearhotbar <player>");
+
 
 
                 }
@@ -33,8 +88,46 @@ public class ClearHotbarCommands implements CommandExecutor {
             }
             if(cmd.getName().equalsIgnoreCase("clearhand")){
 
-                player.getInventory().setItemInMainHand(null);
-                player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aHand cleared!");
+
+                if (args.length == 0){
+
+                    player.getInventory().setItemInMainHand(null);
+                    player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aHand cleared!");
+
+
+                }else if (args.length == 1){
+try{
+    Player target = Bukkit.getPlayerExact(args[0]);
+target.getInventory().setItemInMainHand(null);
+if(target.getUniqueId().equals(player.getUniqueId())){
+
+    player.getInventory().setItemInMainHand(null);
+    player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aHand cleared!");
+
+
+}else{
+
+    player.sendMessage("§6§l[ClearHotbarCommands] §r§l§aCleared §e" + target.getName() + "'s §r§l§ahand!");
+    target.sendMessage("§6§l[ClearHotbarCommands] §r§e" + player.getName() + " §bhas cleared your hand!");
+}
+
+
+}catch (Exception e){
+    player.sendMessage("§cThat player does not exist!");
+
+
+}
+
+
+
+
+                }else{
+
+
+                    player.sendMessage("§c/clearhand <player>");
+
+                }
+
 
 
             }
@@ -53,13 +146,70 @@ public class ClearHotbarCommands implements CommandExecutor {
 
             }
             if (cmd.getName().equalsIgnoreCase("cl")){
-                ClearInvScreen inv = new ClearInvScreen();
-                player.openInventory(inv.getInventory());
-                player.sendMessage(  "§6§l[ClearHotbarCommands]" + " §l§bAre you sure you want to clear your inventory?");
+                if(args.length == 0){
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                    ClearInvScreen inv = new ClearInvScreen();
+                    player.openInventory(inv.getInventory());
+                    player.sendMessage(  "§6§l[ClearHotbarCommands]" + " §l§bAre you sure you want to clear your inventory?");
+                    playertargetplayer.put(player.getUniqueId(), player.getUniqueId());
+
+                }
+
+
+                else if (args.length == 1){
+                    try{
+
+
+                        Player target = Bukkit.getPlayerExact(args[0]);
+
+
+                        if (player.getName() == target.getName()){
+
+
+                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                            ClearInvScreen inv = new ClearInvScreen();
+                            player.openInventory(inv.getInventory());
+                            player.sendMessage(  "§6§l[ClearHotbarCommands]" + " §l§bAre you sure you want to clear your inventory?");
+                            playertargetplayer.put(player.getUniqueId(), player.getUniqueId());
+
+                        }else{
+
+                            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                            playertargetplayer.put(player.getUniqueId(), target.getUniqueId());
+                            player.sendMessage(  "§6§l[ClearHotbarCommands]" + " §bAre you sure you want to clear §e" + target.getName() +  "'s§b inventory?");
+                            ClearInvScreen clearInvScreen = new ClearInvScreen();
+                            player.openInventory(clearInvScreen.getInventory());
+
+
+
+                        }
+
+
+                    }catch (Exception e){
+
+
+                        player.sendMessage("That player does not exist!");
+
+
+                    }
+
+
+
+                }
+                else{
+
+
+                    player.sendMessage("§c/cl <player>");
+
+                }
+
+
 
             }
             if (cmd.getName().equalsIgnoreCase("clearhotbarslot")){
                 if (args.length == 0){
+
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                     ClearHotbarSlotScreen inv = new ClearHotbarSlotScreen();
                     player.openInventory(inv.getInventory());
 
@@ -168,18 +318,111 @@ if (!error){
             }
             if (cmd.getName().equalsIgnoreCase("cleararmor")){
 
-
-                player.getInventory().setArmorContents(null);
-                player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aArmour/Armor cleared!");
+if (args.length == 0){
 
 
 
+    player.getInventory().setArmorContents(null);
+    player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aArmor cleared!");
+
+
+
+}else if (args.length == 1){
+
+    try{
+      Player target = Bukkit.getPlayerExact(args[0]);
+      if (target.getUniqueId().equals(player.getUniqueId())){
+
+          player.getInventory().setArmorContents(null);
+          player.sendMessage("§6§l[ClearHotbarCommands] " + "§r§l§aArmor cleared!");
+
+
+
+      }else{
+
+          target.getInventory().setArmorContents(null);
+          target.sendMessage("§6§l[ClearHotbarCommands] §e" + player.getName() + " §bhas cleared your armor!");
+          player.sendMessage("§6§l[ClearHotbarCommands] §aCleared §r§e"+ target.getName() + "'s §r§aArmor!");
+
+      }
+
+
+
+    }catch (Exception e){
+
+        player.sendMessage("§cThat player does not exist!");
+
+    }
+
+
+
+}else{
+
+
+    player.sendMessage("§c/cleararmor <player>");
+
+}
+
+            }
+
+
+
+if (cmd.getName().equalsIgnoreCase("copyinv")){
+
+    if (args.length != 1){
+
+        player.sendMessage("§c/copyinv <player>");
+
+
+
+
+    }else if (args.length == 1){
+
+
+            try{
+
+                Player target =
+                        Bukkit.getPlayerExact(args[0]);
+
+
+
+
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                playertargetplayer.put(player.getUniqueId(), target.getUniqueId());
+
+
+                if (player.getUniqueId().equals(target.getUniqueId())){
+
+
+                    player.sendMessage("§6§l[ClearHotbarCommands] §bCopied your own inventory...?");
+
+                }else{
+
+                    CopyInvScreen copyInvScreen = new CopyInvScreen();
+                    player.sendMessage("§6§l[ClearHotbarCommands] §bAre you sure you want to copy §e" +target.getName() + "'s §binventory?" );
+                    player.openInventory(copyInvScreen.getInventory());
+
+                }
+
+
+
+            }catch (Exception e){
+
+
+                player.sendMessage("§cThat player does not exist!");
 
             }
 
 
 
 
+
+
+    }
+
+
+
+}
 
         }else{
 

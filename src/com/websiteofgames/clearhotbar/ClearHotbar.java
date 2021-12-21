@@ -17,6 +17,8 @@ public class ClearHotbar extends JavaPlugin {
     getCommand("cl").setExecutor(new ClearHotbarCommands());
     getCommand("clearhotbarslot").setExecutor(new ClearHotbarCommands());
     getCommand("cleararmor").setExecutor(new ClearHotbarCommands());
+        getCommand("copyinv").setExecutor(new ClearHotbarCommands());
+
     }
 
     @Override

@@ -24,12 +24,13 @@ public class ClearInvScreen implements InventoryHolder {
 
 
         ItemStack item;
-        item = createItem("§a§lYes", Material.GREEN_STAINED_GLASS_PANE, Collections.singletonList("§7Clears your inventory!"));
+        item = createItem("§a§lYes", Material.GREEN_STAINED_GLASS_PANE, Collections.singletonList("§7Yes"));
         item.addUnsafeEnchantment(Enchantment.LUCK, 1);
         for(int i = 0; i<4; i++){
 
 
             inv.setItem(i, item);
+
         }
 
 
@@ -40,7 +41,7 @@ public class ClearInvScreen implements InventoryHolder {
         inv.setItem(inv.firstEmpty(), item);
 
 
-        item = createItem("§c§lNo", Material.RED_STAINED_GLASS_PANE, Collections.singletonList("§7Does not clear your inventory!"));
+        item = createItem("§c§lNo", Material.RED_STAINED_GLASS_PANE, Collections.singletonList("§7No"));
         item.addUnsafeEnchantment(Enchantment.LUCK, 1);
         for(int i = 5; i<9; i++){
 
