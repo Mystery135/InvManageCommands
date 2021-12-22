@@ -1,4 +1,4 @@
-package com.websiteofgames.clearhotbar.inventories;
+package me.mxtery.invmanage.inventories;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

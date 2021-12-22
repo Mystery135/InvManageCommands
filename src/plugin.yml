@@ -1,7 +1,7 @@
-name: ClearHotbarCommands
-version: 1.0
+name: InvManageCommands
+version: 1.4
 author: Mxtery
-main: com.websiteofgames.clearhotbar.ClearHotbar
+main: me.mxtery.invmanage.InvManage
 api-version: 1.18
 commands:
   clearhotbar:
@@ -21,7 +21,7 @@ commands:
     usage: /<command> <name of player you want to target>
     aliases: coh
   cl:
-    description: Clears player's inventory after giving them a prompt
+    description: Clears target's inventory after giving them a prompt
     usage: /<command> <player who you want to clear>
   clearhotbarslot:
     description: Clears specific player hotbar slot

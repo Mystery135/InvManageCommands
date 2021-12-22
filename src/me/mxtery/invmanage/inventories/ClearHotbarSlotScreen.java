@@ -1,15 +1,11 @@
-package com.websiteofgames.clearhotbar.inventories;
+package me.mxtery.invmanage.inventories;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.Collections;
-import java.util.List;
 
 public class ClearHotbarSlotScreen implements InventoryHolder {
 private Inventory inv;

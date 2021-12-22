@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ClearHotbar.iml" filepath="$PROJECT_DIR$/ClearHotbar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InvManage.iml" filepath="$PROJECT_DIR$/InvManage.iml" />
     </modules>
   </component>
 </project>
