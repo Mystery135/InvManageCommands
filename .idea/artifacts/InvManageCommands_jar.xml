@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="ClearHotbar:jar">
+  <artifact type="jar" name="InvManageCommands:jar">
     <output-path>$PROJECT_DIR$/../../Plugins/Server/plugins</output-path>
     <root id="archive" name="ClearHotbar.jar">
       <element id="module-output" name="InvManage" />
