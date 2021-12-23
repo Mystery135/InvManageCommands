@@ -1,4 +1,4 @@
-package me.mxtery.invmanage.inventories;
+package me.mxtery.invmanagecommands.inventories;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

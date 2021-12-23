@@ -1,8 +1,8 @@
-package me.mxtery.invmanage.commands;
+package me.mxtery.invmanagecommands.commands;
 
-import me.mxtery.invmanage.inventories.ClearHotbarSlotScreen;
-import me.mxtery.invmanage.inventories.ClearInvScreen;
-import me.mxtery.invmanage.inventories.CopyInvScreen;
+import me.mxtery.invmanagecommands.inventories.ClearHotbarSlotScreen;
+import me.mxtery.invmanagecommands.inventories.ClearInvScreen;
+import me.mxtery.invmanagecommands.inventories.CopyInvScreen;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -36,7 +36,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
 
 
                 }else if (args.length == 1){
-                    if (player.hasPermission("invmanage.affectothers")){
+                    if (player.hasPermission("invmanagecommands.affectothers")){
 
 
                         try{
@@ -78,7 +78,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
                         }
 
                     }else{
-                        player.sendMessage("§cYou don't have the required permission: invmanage.affectothers");
+                        player.sendMessage("§cYou don't have the required permission: invmanagecommands.affectothers");
 
                     }
 
@@ -106,7 +106,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
 
                 }else if (args.length == 1){
 
-                    if (player.hasPermission("invmanage.affectothers")){
+                    if (player.hasPermission("invmanagecommands.affectothers")){
 
                         try{
                             Player target = Bukkit.getPlayerExact(args[0]);
@@ -134,7 +134,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
 
                     }else{
 
-                        player.sendMessage("§cYou don't have the required permission: invmanage.affectothers");
+                        player.sendMessage("§cYou don't have the required permission: invmanagecommands.affectothers");
 
                     }
 
@@ -177,7 +177,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
 
 
                 else if (args.length == 1){
-                    if (player.hasPermission("invmanage.affectothers")){
+                    if (player.hasPermission("invmanagecommands.affectothers")){
 
 
 
@@ -217,7 +217,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
 
                         }
                     }else{
-                        player.sendMessage("§cYou don't have the required permission: invmanage.affectothers");
+                        player.sendMessage("§cYou don't have the required permission: invmanagecommands.affectothers");
 
 
                     }
@@ -359,7 +359,7 @@ if (args.length == 0){
 
 }else if (args.length == 1){
 
-    if (player.hasPermission("invmanage.affectothers")){
+    if (player.hasPermission("invmanagecommands.affectothers")){
 
 
 
@@ -391,7 +391,7 @@ if (args.length == 0){
 
     }else{
 
-        player.sendMessage("§cYou don't have the required permission: invmanage.affectothers");
+        player.sendMessage("§cYou don't have the required permission: invmanagecommands.affectothers");
 
     }
 
@@ -408,7 +408,7 @@ if (args.length == 0){
 
 
 if (cmd.getName().equalsIgnoreCase("copyinv")){
-if (player.hasPermission("invmanage.copyinv")){
+//if (player.hasPermission("invmanagecommands.copyinv")){
 
     if (args.length != 1){
 
@@ -463,9 +463,10 @@ if (player.hasPermission("invmanage.copyinv")){
 
 
 
-}else{
+//}
+else{
 
-    player.sendMessage("§cYou don't have the required permission: clearhotbarcommands.copyinv");
+    player.sendMessage("§cYou don't have the required permission: invmanagecommands.copyinv");
 
 
 }

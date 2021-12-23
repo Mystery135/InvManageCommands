@@ -1,7 +1,7 @@
 name: InvManageCommands
 version: 1.4
 author: Mxtery
-main: me.mxtery.invmanage.InvManage
+main: me.mxtery.invmanagecommands.InvManage
 api-version: 1.18
 commands:
   clearhotbar:
@@ -34,6 +34,8 @@ commands:
   copyinv:
     description: Copies a player's inventory
     usage: /<command> <name of player you want to target>
+    permission: invmanagecommands.copyinv
+    permission-message: §cYou don't have the required permission (invmanagecommands.copyinv)
 
 
 

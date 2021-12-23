@@ -1,7 +1,7 @@
-package me.mxtery.invmanage;
+package me.mxtery.invmanagecommands;
 
-import me.mxtery.invmanage.commands.InvManageCommands;
-import me.mxtery.invmanage.events.InvManageEvents;
+import me.mxtery.invmanagecommands.commands.InvManageCommands;
+import me.mxtery.invmanagecommands.events.InvManageEvents;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class InvManage extends JavaPlugin {

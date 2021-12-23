@@ -1,9 +1,9 @@
-package me.mxtery.invmanage.events;
+package me.mxtery.invmanagecommands.events;
 
-import me.mxtery.invmanage.commands.InvManageCommands;
-import me.mxtery.invmanage.inventories.ClearHotbarSlotScreen;
-import me.mxtery.invmanage.inventories.ClearInvScreen;
-import me.mxtery.invmanage.inventories.CopyInvScreen;
+import me.mxtery.invmanagecommands.commands.InvManageCommands;
+import me.mxtery.invmanagecommands.inventories.ClearHotbarSlotScreen;
+import me.mxtery.invmanagecommands.inventories.ClearInvScreen;
+import me.mxtery.invmanagecommands.inventories.CopyInvScreen;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
