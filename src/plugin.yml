@@ -5,30 +5,30 @@ main: me.mxtery.invmanagecommands.InvManage
 api-version: 1.18
 commands:
   clearhotbar:
-    description: Clears player's hotbar
+    description: Clears target's hotbar
     usage: /<command> <name of player you want to target>
     aliases: chb
   clearhands:
-    description: Clears both of player's hands
+    description: Clears both of the target's hands
     usage: /<command> <name of player you want to target>
     aliases: chs
   clearhand:
-    description: Clears player's main hand
+    description: Clears target's main hand
     usage: /<command> <name of player you want to target>
     aliases: ch
   clearoffhand:
-    description: Clears player's off hand
+    description: Clears target's off hand
     usage: /<command> <name of player you want to target>
     aliases: coh
   cl:
     description: Clears target's inventory after giving them a prompt
     usage: /<command> <player who you want to clear>
   clearhotbarslot:
-    description: Clears specific player hotbar slot
+    description: Clears specific hotbar slot
     usage: /<command> <hotbarslot>
     aliases: chbs
   cleararmor:
-    description: Clears player armour
+    description: Clears target's armour
     usage: /<command> <name of player you want to target>
     aliases: [cleararmour, ca]
   copyinv:
