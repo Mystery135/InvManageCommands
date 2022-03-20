@@ -1,5 +1,5 @@
 name: InvManageCommands
-version: 1.4
+version: 1.5
 author: Mxtery
 main: me.mxtery.invmanagecommands.InvManage
 api-version: 1.18
@@ -36,6 +36,11 @@ commands:
     usage: /<command> <name of player you want to target>
     permission: invmanagecommands.copyinv
     permission-message: §cYou don't have the required permission (invmanagecommands.copyinv)
+  invmanage:
+    description: Opens target's invetory
+    usage: /<command> <target player>
+    permission: invmanagecommands.invmanage
+    permission-message: §cYou don't have the required permission (invmanagecommands.invmanage)
 
 
 

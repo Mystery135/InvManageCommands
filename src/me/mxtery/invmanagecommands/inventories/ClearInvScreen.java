@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ClearInvScreen implements InventoryHolder {
-    private Inventory inv;
+    private final Inventory inv;
     public ClearInvScreen(){
         inv = Bukkit.createInventory(this, 9, "Clear Inventory?");
         init();
@@ -55,6 +55,7 @@ public class ClearInvScreen implements InventoryHolder {
     private ItemStack createItem(String name, Material mat, List<String> lore){
         ItemStack item = new ItemStack(mat, 1);
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(name);
         meta.setLore(lore);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

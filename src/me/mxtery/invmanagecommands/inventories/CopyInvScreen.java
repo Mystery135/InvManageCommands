@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class CopyInvScreen implements InventoryHolder {
-    private Inventory inv;
+    private final Inventory inv;
 
     public CopyInvScreen(){
 
@@ -48,6 +48,7 @@ for(int i = 0; i<4; i++){
     private ItemStack createItem(String name, Material mat){
         ItemStack itemStack = new ItemStack(mat, 1);
         ItemMeta meta = itemStack.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(name);
         itemStack.setItemMeta(meta);
 

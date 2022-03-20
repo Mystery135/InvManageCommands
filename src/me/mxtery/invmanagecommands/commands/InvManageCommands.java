@@ -3,6 +3,7 @@ package me.mxtery.invmanagecommands.commands;
 import me.mxtery.invmanagecommands.inventories.ClearHotbarSlotScreen;
 import me.mxtery.invmanagecommands.inventories.ClearInvScreen;
 import me.mxtery.invmanagecommands.inventories.CopyInvScreen;
+import me.mxtery.invmanagecommands.inventories.InvManageScreen;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -20,8 +21,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command cmd, String s, String[] args) {
-        if (commandSender instanceof Player){
-            Player player = (Player)commandSender;
+        if (commandSender instanceof Player player){
             if (cmd.getName().equalsIgnoreCase("clearhotbar")){
                 if (args.length == 0){
 
@@ -43,6 +43,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
 
                             Player target = Bukkit.getPlayerExact(args[0]);
 
+                            assert target != null;
                             if (player.getUniqueId().equals(target.getUniqueId())){
 
                                 player.sendMessage("§6§l[InvManageCommands] " + "§r§l§aHotbar cleared!");
@@ -110,6 +111,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
 
                         try{
                             Player target = Bukkit.getPlayerExact(args[0]);
+                            assert target != null;
                             target.getInventory().setItemInMainHand(null);
                             if(target.getUniqueId().equals(player.getUniqueId())){
 
@@ -187,6 +189,7 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
                             Player target = Bukkit.getPlayerExact(args[0]);
 
 
+                            assert target != null;
                             if (player.getUniqueId() == target.getUniqueId()){
 
 
@@ -249,30 +252,22 @@ public static HashMap<UUID, UUID> playertargetplayer = new HashMap<>();
                 }else if (args.length <=9){
                     boolean error = false;
 
-                    for (int h = 0; h< args.length; h++) {
+                    for (String arg : args) {
 
-                        if (Integer.parseInt(args[h]) <= 9) {
-                           error = false;
-
-                        }else {
-
-                            error = true;
-
-                        }
+                        error = Integer.parseInt(arg) > 9;
                     }
 
 if (!error){
 
-    for (int i = 0; i<args.length; i++){
-        if (Integer.parseInt(args[i]) <=9){
-            int intargs = Integer.parseInt(args[i]) - 1;
+    for (String arg : args) {
+        if (Integer.parseInt(arg) <= 9) {
+            int intargs = Integer.parseInt(arg) - 1;
             player.getInventory().setItem(intargs, null);
-
 
 
         }
 
-}
+    }
 
     int[] args2 = new int[args.length];
     for (int i=0; i < args.length; i++){
@@ -286,13 +281,7 @@ if (!error){
 
 
     int[] intArgs = new int[args2.length];
-    for (int o = 0; o<intArgs.length;o++){
-
-
-        intArgs[o] = (args2[o]);
-
-
-    }
+    System.arraycopy(args2, 0, intArgs, 0, intArgs.length);
 
     String st = Arrays.stream(intArgs)
             .mapToObj(String::valueOf) // convert each int to a string
@@ -365,6 +354,7 @@ if (args.length == 0){
 
         try{
             Player target = Bukkit.getPlayerExact(args[0]);
+            assert target != null;
             if (target.getUniqueId().equals(player.getUniqueId())){
 
                 player.getInventory().setArmorContents(null);
@@ -417,7 +407,7 @@ if (cmd.getName().equalsIgnoreCase("copyinv")){
 
 
 
-    }else if (args.length == 1){
+    }else {
 
 
         try{
@@ -429,6 +419,7 @@ if (cmd.getName().equalsIgnoreCase("copyinv")){
 
 
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+            assert target != null;
             playertargetplayer.put(player.getUniqueId(), target.getUniqueId());
 
 
@@ -462,17 +453,63 @@ if (cmd.getName().equalsIgnoreCase("copyinv")){
     }
 
 
-
-//}
-else{
-
-    player.sendMessage("§cYou don't have the required permission: invmanagecommands.copyinv");
-
-
 }
 
+            if (cmd.getName().equalsIgnoreCase("invmanage")){
 
-}
+
+                if (args.length != 1){
+
+                    player.sendMessage("§c/invmanage <player>");
+
+
+
+
+                }else {
+
+
+                    try{
+
+                        Player target = Bukkit.getPlayer(args[0]);
+
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+//                        playertargetplayer.put(player.getUniqueId(), target.getUniqueId());
+
+
+                        assert target != null;
+                        if (player.getUniqueId().equals(target.getUniqueId())){
+
+
+                            player.sendMessage("§6§l[InvManageCommands] §bCopied your own inventory...?");
+
+                        }else{
+
+                            InvManageScreen invManageScreen = new InvManageScreen(target);
+                            player.sendMessage("§6§l[InvManageCommands] §bOpened §e" +target.getName() + "'s §binventory!" );
+
+
+                            player.openInventory(invManageScreen.getInventory());
+
+                        }
+
+
+
+                    }catch (Exception e){
+                        player.sendMessage("§cThat player does not exist!");
+
+                    }
+
+
+
+
+
+
+                }
+
+
+            }
+
+
 
         }else{
 

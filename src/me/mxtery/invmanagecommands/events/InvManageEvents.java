@@ -1,17 +1,18 @@
 package me.mxtery.invmanagecommands.events;
 
+import me.mxtery.invmanagecommands.InvManage;
 import me.mxtery.invmanagecommands.commands.InvManageCommands;
 import me.mxtery.invmanagecommands.inventories.ClearHotbarSlotScreen;
 import me.mxtery.invmanagecommands.inventories.ClearInvScreen;
 import me.mxtery.invmanagecommands.inventories.CopyInvScreen;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import me.mxtery.invmanagecommands.inventories.InvManageScreen;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+
+import java.util.Objects;
 
 public class InvManageEvents implements Listener {
     @EventHandler
@@ -56,6 +57,7 @@ public class InvManageEvents implements Listener {
 
                     }else{player.closeInventory();
                         Player target = Bukkit.getPlayer(InvManageCommands.playertargetplayer.get(player.getUniqueId()));
+                        assert target != null;
                         player.sendMessage("§6§l[InvManageCommands] " + ChatColor.GREEN + "Cleared §e" +target.getName() + "'s"+ChatColor.GREEN + " inventory!");
                         target.sendMessage("§6§l[InvManageCommands] §e" + player.getName() + ChatColor.GREEN + " cleared your inventory!");
                         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
@@ -85,17 +87,16 @@ public class InvManageEvents implements Listener {
 
                     if (InvManageCommands.playertargetplayer.get(player.getUniqueId()) == player.getUniqueId()){
                         player.sendMessage("§6§l[InvManageCommands]"+ChatColor.AQUA + " Did not clear your inventory!");
-                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
-                        player.closeInventory();
                     }else{
                         Player target = Bukkit.getPlayer(InvManageCommands.playertargetplayer.get(player.getUniqueId()));
+                        assert target != null;
                         player.sendMessage("§6§l[InvManageCommands]"+ChatColor.AQUA + " Did not clear §e"  + target.getName() + "'s§b inventory!");
-                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                        player.closeInventory();
 
 
                     }
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                    player.closeInventory();
 
 
                 }else if (e.getSlot() == 4){
@@ -109,6 +110,7 @@ public class InvManageEvents implements Listener {
 
                         Player target = Bukkit.getPlayer(InvManageCommands.playertargetplayer.get(player.getUniqueId()));
                         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 0.5f);
+                        assert target != null;
                         player.sendMessage("§6§l[InvManageCommands]" +ChatColor.AQUA +" Are you sure you want to clear §e" + target.getName()+"'s" +ChatColor.AQUA + " inventory? Make a selection!");
 
 
@@ -149,9 +151,8 @@ if(e.getInventory().getHolder() instanceof CopyInvScreen){
     e.setCancelled(true);
     Player player = (Player) e.getWhoClicked();
     if (e.getCurrentItem() == null){
+    return;
 
-
-        return;
     }else{
 
 
@@ -160,8 +161,9 @@ if(e.getInventory().getHolder() instanceof CopyInvScreen){
             player.closeInventory();
             Player target =Bukkit.getPlayer(InvManageCommands.playertargetplayer.get(player.getUniqueId()));
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+            assert target != null;
             player.sendMessage("§6§l[InvManageCommands] §r§bCopied §e" + target.getName() + "'s §binventory!");
-            player.getEquipment().setArmorContents(target.getEquipment().getArmorContents());
+            Objects.requireNonNull(player.getEquipment()).setArmorContents(Objects.requireNonNull(target.getEquipment()).getArmorContents());
             for(int i = 0; i<36; i++){
 
 
@@ -175,6 +177,7 @@ if(e.getInventory().getHolder() instanceof CopyInvScreen){
 
         }else if (e.getSlot() == 4){
             Player target =Bukkit.getPlayer(InvManageCommands.playertargetplayer.get(player.getUniqueId()));
+            assert target != null;
             player.sendMessage("§6§l[InvManageCommands] §r§bDo you want to copy §e" + target.getName() + "'s §binventory?");
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 0.5f);
         }else if (e.getSlot() >4){
@@ -182,6 +185,7 @@ if(e.getInventory().getHolder() instanceof CopyInvScreen){
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
+            assert target != null;
             player.sendMessage("§6§l[InvManageCommands] §r§bDid not copy §e" + target.getName() + "'s §binventory!");
         }
 
@@ -198,5 +202,21 @@ if(e.getInventory().getHolder() instanceof CopyInvScreen){
 
 
 
+    }
+@EventHandler
+    public static void onInvManageInvClicked(InventoryClickEvent event){
+    Bukkit.getScheduler().runTaskLater(InvManage.plugin, () -> {
+        if (event.getInventory().getHolder() instanceof InvManageScreen){
+            String[] targetstr = event.getView().getTitle().split("'");
+            Player target = Bukkit.getPlayer(targetstr[0]);
+            assert target != null;
+            target.getInventory().setContents(event.getView().getTopInventory().getContents());
 
-    }}
+        }
+    }, 1);
+
+
+
+}
+
+}

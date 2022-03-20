@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class ClearHotbarSlotScreen implements InventoryHolder {
-private Inventory inv;
+private final Inventory inv;
 public ClearHotbarSlotScreen(){
 
    inv = Bukkit.createInventory(this, 9, "Which hotbar slot to clear?");
@@ -19,7 +19,7 @@ init();
 private void init(){
 ItemStack item;
 for(int i = 0; i<10; i++){
-    item = createItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE, i);
+    item = createItem(i);
     inv.setItem(inv.firstEmpty(), item);
 
 
@@ -28,9 +28,9 @@ for(int i = 0; i<10; i++){
 
 
 }
-private ItemStack createItem(Material mat, int i){
+private ItemStack createItem(int i){
 
-    ItemStack item = new ItemStack(mat, i);
+    ItemStack item = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE, i);
     ItemMeta meta = item.getItemMeta();
     item.setItemMeta(meta);
     return item;

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="InvManage:jar">
+    <output-path>$PROJECT_DIR$/../../Plugins/Server/plugins</output-path>
+    <root id="archive" name="InvManage.jar">
+      <element id="module-output" name="InvManage" />
+    </root>
+  </artifact>
+</component>
